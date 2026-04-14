@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silicon Cochlea — Complete Study Guide</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #181c27;
+    --bg3: #1e2333;
+    --border: #2a3050;
+    --text: #e8eaf0;
+    --text2: #8b90a8;
+    --text3: #555e80;
+    --teal: #1cc99a;
+    --blue: #4a9eff;
+    --purple: #9b84ff;
+    --amber: #f5a623;
+    --coral: #ff6b6b;
+    --green: #4ecb71;
+    --pink: #ff79c6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* SIDEBAR NAV */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 260px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 24px 0;
+  }
+
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 0 20px 16px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background .15s;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 14px;
+  }
+
+  .nav-item:hover { background: var(--bg3); color: var(--text); }
+  .nav-item.active { background: var(--bg3); border-left-color: var(--teal); color: var(--teal); }
+
+  .nav-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .nav-item.active .nav-num { background: var(--teal); border-color: var(--teal); color: #000; }
+
+  /* MAIN CONTENT */
+  .main {
+    margin-left: 260px;
+    padding: 48px 60px;
+    max-width: 960px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a2040 0%, #0f1117 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .hero p { color: var(--text2); font-size: 17px; max-width: 560px; margin: 0 auto 24px; }
+
+  .hero-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  /* MODULE SECTIONS */
+  .module {
+    margin-bottom: 80px;
+    scroll-margin-top: 32px;
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .module-badge {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .module-title { font-size: 26px; font-weight: 700; }
+  .module-subtitle { color: var(--text2); font-size: 15px; margin-top: 2px; }
+
+  /* CONTENT BLOCKS */
+  .prose { font-size: 16px; line-height: 1.8; color: var(--text); margin-bottom: 24px; }
+  .prose + .prose { margin-top: -8px; }
+
+  h3 { font-size: 20px; font-weight: 600; margin: 36px 0 12px; color: var(--text); }
+  h4 { font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--teal); }
+
+  strong { color: #fff; font-weight: 600; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-left: 3px solid;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .callout-intuition { background: rgba(28,201,154,.08); border-color: var(--teal); }
+  .callout-math      { background: rgba(74,158,255,.08); border-color: var(--blue); }
+  .callout-ti        { background: rgba(245,166,35,.08); border-color: var(--amber); }
+  .callout-key       { background: rgba(155,132,255,.08); border-color: var(--purple); }
+  .callout-warning   { background: rgba(255,107,107,.08); border-color: var(--coral); }
+
+  .callout-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .callout-intuition .callout-label { color: var(--teal); }
+  .callout-math .callout-label      { color: var(--blue); }
+  .callout-ti .callout-label        { color: var(--amber); }
+  .callout-key .callout-label       { color: var(--purple); }
+  .callout-warning .callout-label   { color: var(--coral); }
+
+  /* MATH */
+  .math-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    text-align: center;
+    color: var(--blue);
+    letter-spacing: .02em;
+  }
+
+  .math-explain {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 6px 16px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .math-sym { font-family: 'Courier New', monospace; color: var(--blue); font-weight: 600; }
+  .math-desc { color: var(--text2); }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  .compare-table th {
+    background: var(--bg3);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--bg3); }
+
+  .good { color: var(--green); }
+  .bad  { color: var(--coral); }
+  .neutral { color: var(--text2); }
+
+  /* STEP LIST */
+  .step-list { list-style: none; margin: 16px 0; }
+  .step-list li {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* CANVAS WRAPPERS */
+  .vis-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+
+  .vis-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text3);
+    margin-bottom: 16px;
+  }
+
+  /* FREQUENCY BAR CHART */
+  .freq-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; padding: 0 8px; }
+  .freq-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    transition: height .4s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .freq-bar-label { font-size: 10px; color: var(--text3); text-align: center; margin-top: 6px; }
+
+  /* MOSFET REGIONS */
+  .region-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .region-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .region-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .region-card p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin: 24px 0; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+  .progress-bar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+
+  /* INTERACTIVE CONTROLS */
+  .ctrl-row { display: flex; align-items: center; gap: 16px; margin: 12px 0; }
+  .ctrl-label { font-size: 13px; color: var(--text2); min-width: 80px; }
+  input[type=range] {
+    flex: 1;
+    accent-color: var(--teal);
+    cursor: pointer;
+  }
+  .ctrl-val { font-size: 14px; font-weight: 600; color: var(--teal); min-width: 60px; text-align: right; }
+
+  canvas { display: block; width: 100%; }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0; }
+
+  .info-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .info-card h5 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .info-card p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* MODULE COLOR THEMES */
+  .m1 { background: rgba(28,201,154,.15); color: var(--teal); }
+  .m2 { background: rgba(74,158,255,.15); color: var(--blue); }
+  .m3 { background: rgba(155,132,255,.15); color: var(--purple); }
+  .m4 { background: rgba(245,166,35,.15); color: var(--amber); }
+  .m5 { background: rgba(255,107,107,.15); color: var(--coral); }
+  .m6 { background: rgba(78,203,113,.15); color: var(--green); }
+  .m7 { background: rgba(255,121,198,.15); color: var(--pink); }
+  .m8 { background: rgba(28,201,154,.15); color: var(--teal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px 20px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .region-map { grid-template-columns: 1fr; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* HIGHLIGHT */
+  mark { background: rgba(28,201,154,.2); color: var(--teal); border-radius: 3px; padding: 1px 4px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+  /* FORMULA INLINE */
+  code { font-family: 'Courier New', monospace; background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-size: 14px; color: var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-title">Study Guide</div>
+  <a class="nav-item active" href="#m1" onclick="setActive(this)">
+    <span class="nav-num">1</span> How Sound Works
+  </a>
+  <a class="nav-item" href="#m2" onclick="setActive(this)">
+    <span class="nav-num">2</span> Biological Cochlea
+  </a>
+  <a class="nav-item" href="#m3" onclick="setActive(this)">
+    <span class="nav-num">3</span> Filters from Scratch
+  </a>
+  <a class="nav-item" href="#m4" onclick="setActive(this)">
+    <span class="nav-num">4</span> The MOSFET Deeply
+  </a>
+  <a class="nav-item" href="#m5" onclick="setActive(this)">
+    <span class="nav-num">5</span> OTAs and Gm-C Filters
+  </a>
+  <a class="nav-item" href="#m6" onclick="setActive(this)">
+    <span class="nav-num">6</span> BPF Design & Envelope
+  </a>
+  <a class="nav-item" href="#m7" onclick="setActive(this)">
+    <span class="nav-num">7</span> Noise, Power & DR
+  </a>
+  <a class="nav-item" href="#m8" onclick="setActive(this)">
+    <span class="nav-num">8</span> Full Silicon Cochlea
+  </a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Silicon Cochlea</h1>
+  <p>Complete study guide — from how sound works to designing your own bio-inspired analog processor in CMOS</p>
+  <div class="hero-tags">
+    <span class="tag">8 Modules</span>
+    <span class="tag">Intuition First</span>
+    <span class="tag">Interactive Diagrams</span>
+    <span class="tag">TI Interview Prep</span>
+    <span class="tag">Cadence Ready</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 1 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m1">
+  <div class="module-header">
+    <div class="module-badge m1">1</div>
+    <div>
+      <div class="module-title">How Sound Works</div>
+      <div class="module-subtitle">Waves, frequency, amplitude, the audio spectrum, and what frequency analysis means</div>
+    </div>
+  </div>
+
+  <h3>What is sound?</h3>
+  <p class="prose">Imagine plucking a guitar string. It vibrates back and forth rapidly. That vibration pushes the air molecules right next to it — those molecules push their neighbors — and a chain reaction of pushes and pulls spreads outward in all directions. That spreading disturbance is a sound wave.</p>
+  <p class="prose">The key insight: <strong>air molecules don't travel</strong> from the guitar to your ear. They just push their neighbors. What travels is the <em>disturbance</em> — the pattern of compression and rarefaction. This is identical to how a wave in water doesn't carry water across the ocean — it carries energy through the water.</p>
+
+  <!-- ANIMATED SOUND WAVE -->
+  <div class="vis-wrap">
+    <div class="vis-label">Sound wave — compression and rarefaction</div>
+    <canvas id="c_soundwave" height="120"></canvas>
+  </div>
+
+  <h3>Frequency and Amplitude</h3>
+  <p class="prose">How many times the string completes a full back-and-forth cycle every second is its <strong>frequency</strong>, measured in <strong>Hertz (Hz)</strong>. One complete cycle per second = 1 Hz.</p>
+
+  <div class="grid-2">
+    <div class="info-card">
+      <h5 style="color:var(--teal)">Frequency = Pitch</h5>
+      <p>High-pitched sounds (whistle) vibrate thousands of times per second. Low-pitched sounds (bass drum) vibrate tens of times per second. Your perception of pitch is directly your brain reading frequency.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--amber)">Amplitude = Loudness</h5>
+      <p>How far the string swings determines how large the pressure changes are — this is amplitude. Large swings = loud sound. Small swings = quiet sound. Measured in decibels (dB) for sound pressure.</p>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE WAVE -->
+  <div class="vis-wrap">
+    <div class="vis-label">Interactive — adjust frequency and amplitude</div>
+    <canvas id="c_wave" height="130"></canvas>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Frequency</span>
+      <input type="range" id="wfreq" min="1" max="8" step="0.5" value="3" oninput="drawWave()">
+      <span class="ctrl-val" id="wfreq_v">3 Hz</span>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Amplitude</span>
+      <input type="range" id="wamp" min="10" max="55" step="1" value="40" oninput="drawWave()">
+      <span class="ctrl-val" id="wamp_v">40</span>
+    </div>
+  </div>
+
+  <h3>The Crucial Problem: Real Sound is Mixed</h3>
+  <p class="prose">A pure sine wave at a single frequency is a lab signal. Real sounds — speech, music, noise — are a <strong>jumble of hundreds of frequencies happening simultaneously</strong>. When you speak the vowel "aah", your vocal cords produce a fundamental frequency (say 120 Hz) plus overtones at 240 Hz, 360 Hz, 480 Hz… all added together into one complex waveform.</p>
+  <p class="prose">The shape of your mouth amplifies some overtones and suppresses others. That's what makes your voice sound uniquely like you. To understand what's <em>in</em> any sound signal — what word is being spoken, what instrument is playing — you must <strong>separate it back into its frequency components</strong>. That process is called <strong>frequency analysis</strong>.</p>
+
+  <h3>Two Ways to Do Frequency Analysis</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Approach</th>
+      <th>How it works</th>
+      <th>Power</th>
+      <th>Latency</th>
+    </tr>
+    <tr>
+      <td><strong>Digital FFT</strong><br><span style="color:var(--text2);font-size:13px">DSP / your phone</span></td>
+      <td>Record audio chunk → ADC converts to numbers → algorithm computes frequency content</td>
+      <td class="bad">1–100 mW always-on</td>
+      <td class="bad">10–25 ms (frame delay)</td>
+    </tr>
+    <tr>
+      <td><strong>Analog filter bank</strong><br><span style="color:var(--teal);font-size:13px">Your silicon cochlea</span></td>
+      <td>Physical circuits — each only responds to one frequency range. All fire in parallel. No algorithm needed.</td>
+      <td class="good">1–100 µW event-driven</td>
+      <td class="good">&lt; 1 ms inherent</td>
+    </tr>
+  </table>
+
+  <h3>The Audio Spectrum</h3>
+  <!-- SPECTRUM VISUALIZER -->
+  <div class="vis-wrap">
+    <div class="vis-label">Audio spectrum — click a region to learn what lives there</div>
+    <canvas id="c_spectrum" height="160"></canvas>
+    <div id="spec_info" style="font-size:14px;color:var(--text2);margin-top:12px;min-height:40px;padding:10px;background:var(--bg3);border-radius:8px;">
+      Click any frequency region above to see what sounds live there.
+    </div>
+  </div>
+
+  <h3>The Math: Sine Wave Equation</h3>
+  <div class="math-block">x(t) = A · sin(2π · f · t)</div>
+  <div class="math-explain">
+    <span class="math-sym">t</span><span class="math-desc">time in seconds</span>
+    <span class="math-sym">f</span><span class="math-desc">frequency in Hz — cycles per second</span>
+    <span class="math-sym">A</span><span class="math-desc">amplitude — peak height, related to loudness</span>
+    <span class="math-sym">2πf</span><span class="math-desc">angular frequency ω (omega) in radians/second — you'll use this everywhere in filter math</span>
+    <span class="math-sym">T = 1/f</span><span class="math-desc">period — time for one complete cycle (at 1 kHz: T = 1 ms)</span>
+  </div>
+
+  <h3>Why Logarithmic Spacing?</h3>
+  <p class="prose">Your six filter channels are at 250, 500, 1k, 2k, 4k, 8k Hz — each one double the previous. This is <strong>octave spacing</strong> and it matches how your brain perceives pitch. The jump from 250→500 Hz feels the same as 2k→4k Hz, even though one gap is 250 Hz wide and the other is 2000 Hz wide. Your brain measures <em>ratios</em>, not absolute differences.</p>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "Why did you choose these center frequencies?" — Octave (logarithmic) spacing matches the perceptual resolution of human hearing and the tonotopic organization of the biological cochlea. It's the most information-efficient way to cover the speech spectrum.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 2 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m2">
+  <div class="module-header">
+    <div class="module-badge m2">2</div>
+    <div>
+      <div class="module-title">The Biological Cochlea</div>
+      <div class="module-subtitle">Basilar membrane, hair cells, tonotopic mapping, and why biology is the best engineer</div>
+    </div>
+  </div>
+
+  <h3>The Journey of Sound into Your Brain</h3>
+  <p class="prose">Sound waves enter your ear canal and vibrate the <strong>eardrum</strong>. Three tiny bones (hammer, anvil, stirrup) amplify this vibration and transmit it to the <strong>oval window</strong> — a membrane at the entrance of the cochlea. Inside the cochlea, the real magic happens.</p>
+
+  <!-- COCHLEA ANATOMY ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">Unrolled cochlea — basilar membrane frequency map</div>
+    <canvas id="c_cochlea" height="180"></canvas>
+  </div>
+
+  <h3>The Basilar Membrane — Nature's Filter Bank</h3>
+  <p class="prose">The cochlea is a fluid-filled spiral tube about 35 mm long. Running along its length is the <strong>basilar membrane</strong> — a thin strip of tissue that varies in width and stiffness from one end to the other.</p>
+  <p class="prose">At the <strong>base</strong> (near the oval window): the membrane is narrow and stiff → it resonates at <strong>high frequencies</strong> (up to 20 kHz).</p>
+  <p class="prose">At the <strong>apex</strong> (the far tip): the membrane is wide and floppy → it resonates at <strong>low frequencies</strong> (down to 20 Hz).</p>
+
+  <div class="callout callout-intuition">
+    <div class="callout-label">The Core Intuition</div>
+    When a 1 kHz tone enters the cochlea, a traveling wave sweeps along the basilar membrane. The wave grows in amplitude until it reaches the exact spot tuned to 1 kHz — then it peaks and dies out. That spot gets maximally stimulated. A different frequency stimulates a different spot. This is nature's filter bank: every frequency has its own ZIP code on the basilar membrane.
+  </div>
+
+  <h3>Tonotopic Mapping</h3>
+  <p class="prose"><strong>Tonotopic</strong> = "tone place". Each frequency maps to a specific physical location on the basilar membrane. The mapping is approximately <strong>logarithmic</strong> — equal distances along the membrane correspond to equal ratios of frequency (octaves), not equal Hz differences.</p>
+
+  <!-- TONOTOPIC MAP INTERACTIVE -->
+  <div class="vis-wrap">
+    <div class="vis-label">Interactive tonotopic map — hover to see frequency at each position</div>
+    <canvas id="c_tonotopic" height="140"></canvas>
+    <div id="tono_info" style="font-size:13px;color:var(--text2);margin-top:10px;min-height:24px;"></div>
+  </div>
+
+  <h3>Inner and Outer Hair Cells</h3>
+  <p class="prose">Sitting on the basilar membrane are about <strong>16,000 hair cells</strong> — the actual transducers that convert mechanical vibration into electrical nerve signals.</p>
+
+  <div class="grid-2">
+    <div class="info-card">
+      <h5 style="color:var(--blue)">Inner hair cells (~3,500)</h5>
+      <p>The main sensors. When the membrane vibrates, tiny hairs (stereocilia) on top bend. This opens ion channels, causing electrical current — which becomes a nerve impulse sent to the brain. One inner hair cell serves about 10 auditory nerve fibers.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--purple)">Outer hair cells (~12,000)</h5>
+      <p>Active amplifiers and compressors. They can physically elongate and contract, amplifying quiet sounds and compressing loud ones. This is the biological equivalent of an AGC circuit — the reason you can hear both whispers and jet engines.</p>
+    </div>
+  </div>
+
+  <h3>What Your Silicon Cochlea Copies</h3>
+  <table class="compare-table">
+    <tr><th>Biological structure</th><th>What it does</th><th>Your circuit equivalent</th></tr>
+    <tr>
+      <td>Basilar membrane position</td>
+      <td>Frequency selectivity — each position = one frequency</td>
+      <td>Band-pass filter tuned to f₀</td>
+    </tr>
+    <tr>
+      <td>Inner hair cells</td>
+      <td>Half-wave rectification — convert vibration to signal</td>
+      <td>Envelope detector (diode + RC)</td>
+    </tr>
+    <tr>
+      <td>Outer hair cells</td>
+      <td>Automatic gain control — compress dynamic range</td>
+      <td>AGC circuit with feedback</td>
+    </tr>
+    <tr>
+      <td>Auditory nerve fiber</td>
+      <td>Convert analog amplitude to spike rate</td>
+      <td>Comparator → spike encoder (AER)</td>
+    </tr>
+    <tr>
+      <td>~1000 frequency channels</td>
+      <td>High resolution frequency analysis</td>
+      <td>Your 6–16 channel BPF bank</td>
+    </tr>
+  </table>
+
+  <div class="callout callout-key">
+    <div class="callout-label">Key Insight</div>
+    The biological cochlea runs on roughly <strong>14 µW</strong> of metabolic power and processes 1000 frequency channels in parallel with zero latency. Your silicon cochlea doesn't need to match 1000 channels to be useful — even 6–16 channels with µW-level power consumption beats a DSP for hearing aid and IoT applications.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 3 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m3">
+  <div class="module-header">
+    <div class="module-badge m3">3</div>
+    <div>
+      <div class="module-title">Filters from Scratch</div>
+      <div class="module-subtitle">RC filters, frequency response, Bode plots, and band-pass filter design</div>
+    </div>
+  </div>
+
+  <h3>What is a Filter?</h3>
+  <p class="prose">A filter is a circuit that lets some frequencies through and blocks others. That's it. The "frequency response" of a filter tells you, for every possible input frequency, how much of it comes out the other end.</p>
+  <p class="prose">Think of a coffee filter: small dissolved particles pass through, large coffee grounds don't. An electronic filter does the same thing with frequencies instead of particles.</p>
+
+  <h3>The RC Low-Pass Filter — Your First Filter</h3>
+  <p class="prose">The simplest filter is just a resistor and capacitor. Connect them in series; take the output across the capacitor.</p>
+
+  <!-- RC FILTER ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">RC low-pass filter — interactive frequency response</div>
+    <canvas id="c_rcfilter" height="200"></canvas>
+    <div class="ctrl-row">
+      <span class="ctrl-label">R (kΩ)</span>
+      <input type="range" id="rcR" min="1" max="100" step="1" value="10" oninput="drawRC()">
+      <span class="ctrl-val" id="rcR_v">10 kΩ</span>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">C (nF)</span>
+      <input type="range" id="rcC" min="1" max="100" step="1" value="16" oninput="drawRC()">
+      <span class="ctrl-val" id="rcC_v">16 nF</span>
+    </div>
+    <div id="rc_fc" style="font-size:13px;color:var(--teal);margin-top:8px;"></div>
+  </div>
+
+  <div class="callout callout-intuition">
+    <div class="callout-label">Why does this work?</div>
+    A capacitor's impedance is <code>1/(jωC)</code> — at low frequencies (small ω), this impedance is very large, so most voltage appears across the capacitor (output is large). At high frequencies (large ω), impedance is tiny, so almost no voltage appears across the capacitor (output is small). The resistor and capacitor form a voltage divider whose ratio changes with frequency.
+  </div>
+
+  <h3>The Cut-off Frequency</h3>
+  <div class="math-block">f_c = 1 / (2π · R · C)</div>
+  <p class="prose">At f_c, the output is exactly <strong>−3 dB</strong> (about 70.7%) of the input. Below f_c, signal passes through largely unaffected. Above f_c, it gets attenuated — falling at <strong>−20 dB per decade</strong> (a 10× increase in frequency causes 10× reduction in output).</p>
+
+  <h3>High-Pass, Low-Pass, Band-Pass</h3>
+  <div class="vis-wrap">
+    <div class="vis-label">Three filter types — frequency response comparison</div>
+    <canvas id="c_filtertypes" height="200"></canvas>
+  </div>
+
+  <div class="grid-3">
+    <div class="info-card">
+      <h5 style="color:var(--blue)">Low-pass</h5>
+      <p>Passes low frequencies, blocks high. Swap R and C positions in the RC circuit. Used for anti-aliasing before ADC.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--purple)">High-pass</h5>
+      <p>Passes high frequencies, blocks low. DC and low-frequency drift get removed. Used for AC coupling.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--teal)">Band-pass</h5>
+      <p>Passes a range around center frequency f₀, blocks everything else. This is exactly one channel of your cochlea.</p>
+    </div>
+  </div>
+
+  <h3>The Band-Pass Filter — Your Cochlea's Core</h3>
+  <p class="prose">A band-pass filter (BPF) is described by two parameters: the <strong>center frequency f₀</strong> (what it's tuned to) and the <strong>quality factor Q</strong> (how selective it is).</p>
+
+  <div class="math-block">Q = f₀ / BW₋₃dB</div>
+  <div class="math-explain">
+    <span class="math-sym">f₀</span><span class="math-desc">center frequency — the peak of the response</span>
+    <span class="math-sym">BW</span><span class="math-desc">bandwidth — frequency range between the two −3 dB points</span>
+    <span class="math-sym">Q</span><span class="math-desc">quality factor — higher Q = narrower, sharper filter</span>
+  </div>
+
+  <!-- BPF INTERACTIVE -->
+  <div class="vis-wrap">
+    <div class="vis-label">Band-pass filter response — interactive Q factor</div>
+    <canvas id="c_bpf" height="220"></canvas>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Center freq</span>
+      <input type="range" id="bpf_f0" min="0" max="5" step="1" value="2" oninput="drawBPF()">
+      <span class="ctrl-val" id="bpf_f0_v">1 kHz</span>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Q factor</span>
+      <input type="range" id="bpf_q" min="1" max="10" step="0.5" value="3.5" oninput="drawBPF()">
+      <span class="ctrl-val" id="bpf_q_v">Q = 3.5</span>
+    </div>
+    <div id="bpf_info" style="font-size:13px;color:var(--text2);margin-top:8px;"></div>
+  </div>
+
+  <h3>Bode Plots — Reading Filter Specs</h3>
+  <p class="prose">A Bode plot has two graphs. The <strong>magnitude plot</strong> shows gain (in dB) vs frequency on a log scale. The <strong>phase plot</strong> shows how much the output lags the input. In Cadence Virtuoso, your AC analysis produces a Bode plot automatically.</p>
+
+  <div class="callout callout-math">
+    <div class="callout-label">dB Scale</div>
+    Gain in dB = 20 · log₁₀(Vout/Vin). So: 0 dB = no change, −3 dB = 70.7% amplitude, −20 dB = 10% amplitude, −40 dB = 1% amplitude. The −3 dB point is the standard definition of a filter's cutoff or bandwidth edge.
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "What is Q factor and why does it matter?" — Q is the ratio of center frequency to bandwidth. High Q means the filter is very selective — it only passes a narrow range around its center frequency. For a cochlea, higher Q at higher frequencies mimics the basilar membrane's sharper tuning at the base, improving frequency resolution for consonant sounds.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 4 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m4">
+  <div class="module-header">
+    <div class="module-badge m4">4</div>
+    <div>
+      <div class="module-title">The MOSFET Deeply</div>
+      <div class="module-subtitle">Regions of operation, transconductance Gm, subthreshold biasing, and CMOS</div>
+    </div>
+  </div>
+
+  <h3>What a MOSFET Actually Does</h3>
+  <p class="prose">A MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor) is a voltage-controlled current source. You apply a voltage to the <strong>gate (G)</strong>, and it controls how much current flows between <strong>drain (D)</strong> and <strong>source (S)</strong>. The gate is insulated from the channel by a thin oxide layer — so it draws essentially zero current itself.</p>
+  <p class="prose">In CMOS, you have two types: <strong>NMOS</strong> (conducts when gate voltage is high) and <strong>PMOS</strong> (conducts when gate voltage is low). CMOS uses both together — the N and P in CMOS stand for these two types.</p>
+
+  <!-- MOSFET ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">MOSFET — gate voltage controls drain current</div>
+    <canvas id="c_mosfet" height="200"></canvas>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Gate voltage V_GS</span>
+      <input type="range" id="mos_vgs" min="0" max="30" step="1" value="8" oninput="drawMOSFET()">
+      <span class="ctrl-val" id="mos_vgs_v">0.8V</span>
+    </div>
+    <div id="mos_region" style="font-size:13px;margin-top:8px;padding:8px 12px;border-radius:6px;background:var(--bg3);"></div>
+  </div>
+
+  <h3>The Three Regions of Operation</h3>
+  <div class="region-map">
+    <div class="region-card" style="border-color:var(--text3)">
+      <h5 style="color:var(--text3)">Cutoff (Off)</h5>
+      <p>V_GS &lt; V_th. No inversion layer. Drain current ≈ 0. Transistor is an open switch. Used in digital logic.</p>
+    </div>
+    <div class="region-card" style="border-color:var(--blue)">
+      <h5 style="color:var(--blue)">Linear (Triode)</h5>
+      <p>V_GS > V_th AND V_DS &lt; V_GS − V_th. Acts like a voltage-controlled resistor. Used in switches and pass gates.</p>
+    </div>
+    <div class="region-card" style="border-color:var(--teal)">
+      <h5 style="color:var(--teal)">Saturation ✓</h5>
+      <p>V_GS > V_th AND V_DS > V_GS − V_th. Current is nearly independent of V_DS. This is the amplifier region — where your OTAs operate.</p>
+    </div>
+  </div>
+
+  <h3>Transconductance — The Key Parameter</h3>
+  <p class="prose"><strong>Transconductance Gm</strong> is how much the drain current changes when you nudge the gate voltage: <code>Gm = ΔI_D / ΔV_GS</code>. It's the transistor's "gain" — how responsive it is to a small input signal.</p>
+  <p class="prose">In saturation (strong inversion), the current is: <code>I_D = (µCox W/2L)(V_GS − V_th)²</code>, which gives <code>Gm = µCox(W/L)(V_GS − V_th) = √(2µCox(W/L)I_D)</code></p>
+
+  <div class="callout callout-key">
+    <div class="callout-label">Why Gm Matters for Your Project</div>
+    In a Gm-C filter, your center frequency is set by: <strong>f₀ = Gm / (2πC)</strong>. To tune a channel to 1 kHz with C = 10 pF, you need Gm = 2π × 1000 × 10×10⁻¹² ≈ 63 nA/V. To get this from a MOSFET, you control the bias current. Gm is your tuning knob.
+  </div>
+
+  <h3>Subthreshold Operation — The Power Secret</h3>
+  <p class="prose">Here's something most students miss: <strong>a MOSFET doesn't turn completely off below V_th</strong>. It still conducts — exponentially less, but still. This is the <strong>subthreshold</strong> or <strong>weak inversion</strong> region.</p>
+
+  <div class="math-block">I_D = I₀ · (W/L) · exp(V_GS / n·V_T)&nbsp;&nbsp;&nbsp;where V_T = kT/q ≈ 26 mV at 27°C</div>
+
+  <!-- SUBTHRESHOLD VIS -->
+  <div class="vis-wrap">
+    <div class="vis-label">I_D vs V_GS — log scale showing subthreshold region</div>
+    <canvas id="c_subthresh" height="200"></canvas>
+  </div>
+
+  <p class="prose">In subthreshold: <code>Gm = I_D / (n·V_T)</code>. This means <strong>Gm is proportional to current</strong>. With I_D = 10 nA and n·V_T ≈ 40 mV, you get Gm = 250 nA/V — enough to make audio filters, at just 10 nA of bias current per transistor. This is why subthreshold operation is the single biggest power win for your design.</p>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">Subthreshold Tradeoffs</div>
+    Speed: bandwidth drops (Gm is lower, but C stays the same — so f₀ = Gm/2πC drops). You fix this by reducing C. Noise: 1/f noise is worse in subthreshold. Speed of response is slower. None of these matter for audio frequencies (20 Hz–20 kHz) — you have enormous headroom.
+  </div>
+
+  <h3>CMOS Inverter — The Building Block</h3>
+  <p class="prose">A CMOS inverter is just one NMOS and one PMOS transistor in series. It's the building block of all digital logic. In analog, two inverters in series form a simple amplifier. But for precision analog work, we build proper OTAs — covered next.</p>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "Why run your OTAs in subthreshold?" — Subthreshold is the sweet spot for Gm/I_D ratio. In strong inversion, Gm scales as √I_D. In subthreshold, Gm scales linearly with I_D — you get more transconductance per unit current. For audio-frequency Gm-C filters, bias currents of 1–100 nA are sufficient, bringing per-channel power into the single-digit µW range. The tradeoff is increased susceptibility to 1/f noise and process mismatch — both manageable with careful layout.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 5 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m5">
+  <div class="module-header">
+    <div class="module-badge m5">5</div>
+    <div>
+      <div class="module-title">OTAs and Gm-C Filters</div>
+      <div class="module-subtitle">Operational transconductance amplifiers, OTA-C integrators, and how to build tunable filters</div>
+    </div>
+  </div>
+
+  <h3>What is an OTA?</h3>
+  <p class="prose">An <strong>Operational Transconductance Amplifier (OTA)</strong> is like an op-amp, but instead of outputting a voltage proportional to input voltage, it outputs a <strong>current</strong> proportional to input voltage difference.</p>
+
+  <div class="math-block">I_out = Gm · (V+ − V−)</div>
+
+  <p class="prose">The output is a current source with very high output impedance. This is crucial — when you connect a capacitor to the output, the current charges it and the capacitor voltage integrates the input. <strong>One OTA + one capacitor = one integrator</strong>. And from integrators, you can build any filter.</p>
+
+  <h3>The OTA-C Integrator</h3>
+  <p class="prose">Connect the OTA output to a capacitor C. The current I_out = Gm·V_in charges the capacitor. The output voltage is the integral of the input current divided by C:</p>
+
+  <div class="math-block">V_out(s) / V_in(s) = Gm / (s · C)&nbsp;&nbsp;&nbsp;where s = j2πf</div>
+
+  <!-- OTA-C ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">OTA-C integrator — signal flows through transconductor into capacitor</div>
+    <canvas id="c_ota" height="180"></canvas>
+  </div>
+
+  <div class="callout callout-intuition">
+    <div class="callout-label">The Core Intuition</div>
+    Think of the OTA as a tap (faucet) and the capacitor as a bucket. The tap's flow rate is proportional to the input voltage. The water level in the bucket (= output voltage) is the integral of the flow. To change the "frequency" at which this integrator operates, you just turn the tap — change Gm by adjusting the bias current. No physical components to swap out. This is why Gm-C filters are electronically tunable.
+  </div>
+
+  <h3>From Integrators to a Band-Pass Filter</h3>
+  <p class="prose">Two OTA-C integrators connected in a feedback loop, with a third OTA setting the Q, form a complete <strong>second-order band-pass filter</strong>. This is the Tow-Thomas biquad in OTA-C form.</p>
+
+  <!-- TFTOPO -->
+  <div class="vis-wrap">
+    <div class="vis-label">Tow-Thomas OTA-C biquad topology (your filter architecture)</div>
+    <canvas id="c_towtom" height="200"></canvas>
+  </div>
+
+  <div class="math-block">f₀ = Gm / (2π · C)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q = Gm1 / Gm2</div>
+  <div class="math-explain">
+    <span class="math-sym">Gm</span><span class="math-desc">transconductance of the integrating OTAs — sets center frequency</span>
+    <span class="math-sym">C</span><span class="math-desc">integration capacitor — also sets center frequency</span>
+    <span class="math-sym">Gm1</span><span class="math-desc">input OTA transconductance</span>
+    <span class="math-sym">Gm2</span><span class="math-desc">damping OTA transconductance — ratio sets Q</span>
+  </div>
+
+  <h3>Why OTA-C Instead of Resistors?</h3>
+  <table class="compare-table">
+    <tr><th>Property</th><th>RC filter (resistors+caps)</th><th>OTA-C filter</th></tr>
+    <tr>
+      <td>Tuning</td>
+      <td class="bad">Fixed — must change physical R or C</td>
+      <td class="good">Electronic — change bias current → Gm → f₀ changes</td>
+    </tr>
+    <tr>
+      <td>Area in CMOS</td>
+      <td class="bad">Resistors are large in CMOS</td>
+      <td class="good">OTAs are small transistor circuits</td>
+    </tr>
+    <tr>
+      <td>Power</td>
+      <td class="neutral">Depends on R values</td>
+      <td class="good">Can be nW–µW in subthreshold</td>
+    </tr>
+    <tr>
+      <td>Process variation</td>
+      <td class="bad">R and C both vary ~20%</td>
+      <td class="neutral">Gm/C ratio — can correct Gm via bias</td>
+    </tr>
+  </table>
+
+  <h3>OTA Circuit — The Differential Pair</h3>
+  <p class="prose">The simplest OTA is a <strong>differential pair</strong>: two matched NMOS transistors with sources tied together and connected to a tail current source I_bias. The differential input voltage (V+ − V−) steers current between the two branches. Gm = I_bias / (2·n·V_T) in subthreshold.</p>
+
+  <div class="callout callout-math">
+    <div class="callout-label">Design Equation</div>
+    To hit f₀ = 1 kHz with C = 10 pF: Gm = 2π × 1000 × 10×10⁻¹² = 62.8 nA/V. In subthreshold: I_bias = Gm × n×V_T = 62.8×10⁻⁹ × 0.04 ≈ 2.5 nA. So the entire filter channel runs on ~5 nA (two integrators) — roughly 2.5 nW at 0.5V supply. This is how biological power levels are achieved.
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "Why choose Tow-Thomas biquad over Sallen-Key?" — The Tow-Thomas (or KHN biquad) gives independent control of f₀, Q, and gain through three separate OTAs. In a Sallen-Key, f₀ and Q are coupled through the same passive components, making independent tuning difficult. For a cochlea where you want to trim each channel's center frequency post-fabrication via bias current adjustment, Tow-Thomas is the better architecture.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 6 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m6">
+  <div class="module-header">
+    <div class="module-badge m6">6</div>
+    <div>
+      <div class="module-title">BPF Design and Envelope Detection</div>
+      <div class="module-subtitle">Putting Q factor to work, designing per-channel filters, and extracting energy with envelope detectors</div>
+    </div>
+  </div>
+
+  <h3>Designing Your 6-Channel Filter Bank</h3>
+  <p class="prose">Your cochlea has 6 channels. Each needs a different f₀, but all share the same circuit topology — only the bias current (which controls Gm) changes between channels.</p>
+
+  <!-- CHANNEL TABLE -->
+  <table class="compare-table">
+    <tr><th>Channel</th><th>f₀</th><th>Q</th><th>BW (Hz)</th><th>Gm needed (C=10pF)</th><th>I_bias (subthresh)</th></tr>
+    <tr><td>1</td><td>250 Hz</td><td>3.5</td><td>71 Hz</td><td>15.7 nA/V</td><td>~0.6 nA</td></tr>
+    <tr><td>2</td><td>500 Hz</td><td>3.5</td><td>143 Hz</td><td>31.4 nA/V</td><td>~1.3 nA</td></tr>
+    <tr><td>3</td><td>1 kHz</td><td>4.0</td><td>250 Hz</td><td>62.8 nA/V</td><td>~2.5 nA</td></tr>
+    <tr><td>4</td><td>2 kHz</td><td>4.0</td><td>500 Hz</td><td>125.7 nA/V</td><td>~5 nA</td></tr>
+    <tr><td>5</td><td>4 kHz</td><td>5.0</td><td>800 Hz</td><td>251.3 nA/V</td><td>~10 nA</td></tr>
+    <tr><td>6</td><td>8 kHz</td><td>5.0</td><td>1.6 kHz</td><td>502.7 nA/V</td><td>~20 nA</td></tr>
+  </table>
+
+  <p class="prose">Notice how Q increases with frequency — this mimics the basilar membrane's sharper tuning at the high-frequency base of the cochlea. Lower channels have wider bandwidths to capture the slower-varying energy in bass speech; higher channels are sharper to resolve consonant detail.</p>
+
+  <h3>What is an Envelope Detector?</h3>
+  <p class="prose">The BPF output is a sinusoidal signal at f₀ — its amplitude varies with how much energy is present at that frequency. But you don't want to send a 1 kHz sine wave to the brain (or to your downstream processor). You want to know: <strong>how loud is the 1 kHz component, right now?</strong> That's the envelope — the slowly-varying outline of the fast oscillation.</p>
+
+  <!-- ENVELOPE ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">Envelope detection — extracting the slow amplitude from the fast carrier</div>
+    <canvas id="c_envelope" height="180"></canvas>
+  </div>
+
+  <h3>The Envelope Detector Circuit</h3>
+  <p class="prose">The simplest envelope detector is a <strong>half-wave rectifier + RC low-pass filter</strong>:</p>
+  <ul class="step-list">
+    <li><span class="step-num">1</span>A diode (or diode-connected MOSFET) passes only the positive half-cycles of the BPF output. This is half-wave rectification.</li>
+    <li><span class="step-num">2</span>An RC filter smooths the rectified signal. The capacitor charges up during positive peaks and slowly discharges between them.</li>
+    <li><span class="step-num">3</span>The result is a slowly-varying DC voltage that tracks the amplitude of the BPF output — the envelope.</li>
+  </ul>
+
+  <div class="callout callout-key">
+    <div class="callout-label">Time Constant Tradeoff</div>
+    The RC time constant τ = R·C determines how fast the envelope detector tracks changes. Too small: the output follows individual cycles (noisy, not smooth). Too large: it can't follow rapid changes in speech. For speech, τ ≈ 8–16 ms is the sweet spot — fast enough to track syllables (≈5–10 per second), slow enough to ignore the carrier oscillation.
+  </div>
+
+  <h3>Automatic Gain Control (AGC)</h3>
+  <p class="prose">A quiet whisper and a loud shout can differ by 60 dB in amplitude. Your BPF has a limited linear range — maybe 40 dB. Without AGC, loud sounds saturate the circuit and quiet sounds fall below noise floor.</p>
+  <p class="prose">AGC is a feedback loop: the envelope detector output is compared to a reference. If the signal is too large, a control circuit reduces the gain. If too small, gain increases. This compresses a 60–80 dB input range into a 40 dB internal range — exactly what outer hair cells do biologically.</p>
+
+  <h3>Cadence Simulation Checklist for This Module</h3>
+  <ul class="step-list">
+    <li><span class="step-num">1</span><strong>AC Analysis:</strong> Sweep 100 Hz to 20 kHz, 100 pts/decade. Verify f₀ matches target, BW = f₀/Q at −3 dB points.</li>
+    <li><span class="step-num">2</span><strong>DC Operating Point:</strong> Confirm all transistors in saturation. Check actual bias currents match your design table above.</li>
+    <li><span class="step-num">3</span><strong>Transient:</strong> Apply 1 mVpp sine at f₀. Verify envelope detector output is a smooth DC with correct time constant.</li>
+    <li><span class="step-num">4</span><strong>Multi-tone test:</strong> Apply 250 Hz + 1 kHz simultaneously. Verify channels 1 and 3 respond, channels 2/4/5/6 are quiet.</li>
+    <li><span class="step-num">5</span><strong>Corner analysis:</strong> Run TT, FF, SS corners. Note how much f₀ shifts — this motivates the tunable bias upgrade.</li>
+  </ul>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "How do you verify your filter is centered at the right frequency?" — Run an AC analysis in Cadence, find the peak of the magnitude response. The frequency of maximum gain is f₀. Measure the −3 dB frequencies on either side; their difference is the bandwidth BW. Q = f₀/BW. Cross-check with the design equation f₀ = Gm/2πC by measuring the actual Gm from the DC operating point.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 7 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m7">
+  <div class="module-header">
+    <div class="module-badge m7">7</div>
+    <div>
+      <div class="module-title">Noise, Power, and Dynamic Range</div>
+      <div class="module-subtitle">Thermal noise, flicker noise, SNR, dynamic range, and power budgeting</div>
+    </div>
+  </div>
+
+  <h3>Where Does Noise Come From?</h3>
+  <p class="prose">Every resistor and transistor generates noise — random fluctuations in current or voltage caused by the thermal motion of electrons. You can't eliminate it, only minimize it. Understanding noise is what separates a design that works in simulation from one that works in the real world.</p>
+
+  <div class="grid-2">
+    <div class="info-card">
+      <h5 style="color:var(--amber)">Thermal noise (Johnson noise)</h5>
+      <p>Every resistor generates a noise voltage: V²_n = 4kTRΔf. It's white — equal power at all frequencies. In MOSFETs, the channel resistance generates thermal noise: I²_n = 4kTγGm.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--coral)">Flicker noise (1/f noise)</h5>
+      <p>MOSFETs also generate noise whose power density rises at low frequencies: S(f) = K/(CoxWLf). Dominant below 1–100 kHz — right in your audio band. Subthreshold operation makes this worse.</p>
+    </div>
+  </div>
+
+  <!-- NOISE SPECTRUM ANIMATION -->
+  <div class="vis-wrap">
+    <div class="vis-label">Noise power spectral density — thermal (white) + flicker (1/f)</div>
+    <canvas id="c_noise" height="180"></canvas>
+  </div>
+
+  <h3>Signal-to-Noise Ratio (SNR)</h3>
+  <div class="math-block">SNR = 20 · log₁₀(V_signal / V_noise)&nbsp;&nbsp;[dB]</div>
+  <p class="prose">SNR tells you how much larger your signal is than the noise floor. For hearing aids: SNR > 60 dB is needed for intelligible speech. For cochlear implants: > 50 dB. Your subthreshold OTA-C design can achieve this — but you need to carefully size your capacitors (larger C = lower noise from the kT/C relationship).</p>
+
+  <h3>Dynamic Range</h3>
+  <p class="prose"><strong>Dynamic range (DR)</strong> is the ratio between the largest signal the circuit can handle (before distortion) and the smallest (above the noise floor). It sets how wide a range of loudness levels your cochlea can handle.</p>
+
+  <div class="math-block">DR = 20 · log₁₀(V_max / V_noise)&nbsp;&nbsp;[dB]</div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Human hearing DR</span><span>120 dB</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--teal)"></div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>State-of-the-art silicon cochlea (DAS)</span><span>~80 dB</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:67%;background:var(--blue)"></div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Basic subthreshold OTA-C filter</span><span>~50–60 dB</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:50%;background:var(--purple)"></div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Minimum for speech intelligibility</span><span>~50 dB</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:42%;background:var(--amber)"></div></div>
+  </div>
+
+  <h3>Power Budgeting</h3>
+  <p class="prose">For a TI interview, you need to be able to break down your power consumption block by block. Here's how to think about it:</p>
+  <table class="compare-table">
+    <tr><th>Block</th><th>Power estimate</th><th>How to reduce</th></tr>
+    <tr><td>Pre-amplifier</td><td>~1–5 µW</td><td>Subthreshold folded-cascode OTA</td></tr>
+    <tr><td>Each BPF channel (×6)</td><td>~0.5–5 µW</td><td>Subthreshold bias, smaller C</td></tr>
+    <tr><td>Each envelope detector (×6)</td><td>~0.1–0.5 µW</td><td>Diode-connected PMOS rectifier</td></tr>
+    <tr><td>Bias generation circuit</td><td>~1–2 µW</td><td>One shared bias, mirrored to channels</td></tr>
+    <tr><td><strong>Total (6 channels)</strong></td><td><strong>~10–40 µW</strong></td><td>vs DSP: 1–10 mW (100× saving)</td></tr>
+  </table>
+
+  <h3>kT/C Noise — The Fundamental Limit</h3>
+  <p class="prose">When you sample a voltage across a capacitor (or when a capacitor charges through a resistor), there's an unavoidable noise voltage: <code>V²_n = kT/C</code>. This means to reduce noise, you must increase capacitor size. The tradeoff: larger C means lower f₀ for a given Gm, or you need larger Gm, which means more power.</p>
+
+  <div class="callout callout-math">
+    <div class="callout-label">The Noise-Power-Bandwidth Triangle</div>
+    Every filter has a fundamental tradeoff: lower noise requires larger C. Larger C requires larger Gm to hit the same f₀. Larger Gm requires more bias current. More bias current = more power. You cannot simultaneously minimize noise, power, and area — you must choose two to optimize and accept a tradeoff on the third. This is the central design problem in analog IC engineering.
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">TI Interview Answer</div>
+    "How did you determine your capacitor values?" — kT/C noise sets the minimum capacitor size for a given noise floor target. For 60 dB SNR with a 1 mVpp signal, V_noise &lt; 1 µV_rms. kT/C = (1×10⁻²³ × 300) / C ≤ (10⁻⁶)² → C ≥ 3 pF. I used C = 10 pF to give 10 dB of noise margin, at the cost of needing Gm ≈ 63 nA/V for a 1 kHz center frequency.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE 8 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="module" id="m8">
+  <div class="module-header">
+    <div class="module-badge m8">8</div>
+    <div>
+      <div class="module-title">The Full Silicon Cochlea</div>
+      <div class="module-subtitle">Complete architecture, Cadence simulation workflow, upgrade roadmap, and TI interview preparation</div>
+    </div>
+  </div>
+
+  <h3>Putting It All Together</h3>
+  <p class="prose">Every concept in this guide feeds directly into one block of the silicon cochlea. Here's the complete picture:</p>
+
+  <!-- FULL ARCHITECTURE DIAGRAM -->
+  <div class="vis-wrap">
+    <div class="vis-label">Complete silicon cochlea signal path</div>
+    <canvas id="c_arch" height="280"></canvas>
+  </div>
+
+  <h3>The Full Signal Flow</h3>
+  <ul class="step-list">
+    <li><span class="step-num">1</span><strong>Microphone / line input:</strong> Sound pressure → electrical voltage. Typical sensitivity: −42 dBV/Pa. Output is a complex mixed signal containing all frequencies simultaneously.</li>
+    <li><span class="step-num">2</span><strong>Pre-amplifier:</strong> Gain stage (20–40 dB) to bring the signal into the OTA's linear input range. Implemented as a subthreshold folded-cascode OTA in unity-gain or fixed-gain configuration. Sets the input-referred noise floor of the entire system.</li>
+    <li><span class="step-num">3</span><strong>Signal bus:</strong> The amplified signal is distributed to all 6 BPF channels in parallel. High input impedance of each OTA means loading is minimal.</li>
+    <li><span class="step-num">4</span><strong>BPF channels (×6):</strong> Each is a Tow-Thomas OTA-C biquad. Center frequencies: 250, 500, 1k, 2k, 4k, 8k Hz. Q increases from 3.5 to 5 with frequency. Each channel fires simultaneously — this is the key advantage over digital FFT.</li>
+    <li><span class="step-num">5</span><strong>Envelope detectors (×6):</strong> Each extracts the slowly-varying amplitude of its BPF channel. Output is a DC voltage proportional to signal energy in that frequency band. Time constant τ ≈ 8–16 ms for speech tracking.</li>
+    <li><span class="step-num">6</span><strong>Outputs:</strong> Six DC voltages representing the spectral energy distribution of the input sound, updated in real-time at sub-millisecond latency.</li>
+  </ul>
+
+  <h3>Cadence Virtuoso — Full Simulation Workflow</h3>
+  <div class="grid-2">
+    <div class="info-card">
+      <h5 style="color:var(--teal)">Phase 1 — Individual channel</h5>
+      <p>Build one OTA-C BPF (1 kHz). Run DC OP, verify saturation. Run AC analysis, verify f₀ and Q. Run transient with 1 kHz tone. Run noise analysis.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--blue)">Phase 2 — Full bank</h5>
+      <p>Instantiate 6 channels with different bias currents. Run AC analysis of all channels on one plot. Test with multi-tone input (250 Hz + 1 kHz + 4 kHz).</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--purple)">Phase 3 — Corners & variation</h5>
+      <p>Monte Carlo: 100–200 runs with device mismatch. Measure f₀ spread across channels. TT/FF/SS/SF/FS corners. Temperature sweep 0–70°C.</p>
+    </div>
+    <div class="info-card">
+      <h5 style="color:var(--amber)">Phase 4 — Full system</h5>
+      <p>Add pre-amp and envelope detectors. Transient with speech-like signal. Measure dynamic range. Compute total power from supply currents.</p>
+    </div>
+  </div>
+
+  <h3>Upgrade Roadmap — How to Beat DSPs</h3>
+  <table class="compare-table">
+    <tr><th>Upgrade</th><th>What it adds</th><th>Effort</th></tr>
+    <tr>
+      <td><strong>Subthreshold biasing</strong></td>
+      <td>100× power reduction — from µA to nA bias currents</td>
+      <td class="good">Low — just reduce I_bias in Cadence</td>
+    </tr>
+    <tr>
+      <td><strong>16 channels (ERB-spaced)</strong></td>
+      <td>Better frequency resolution matching human perception</td>
+      <td class="good">Low — copy cell, change C value</td>
+    </tr>
+    <tr>
+      <td><strong>Tunable bias + AGC</strong></td>
+      <td>Corrects process mismatch, extends DR to 80+ dB</td>
+      <td class="neutral">Medium — adds IDAC and feedback loop</td>
+    </tr>
+    <tr>
+      <td><strong>Spike encoder (AER)</strong></td>
+      <td>Eliminates ADC and DSP entirely from the system</td>
+      <td class="neutral">Medium — comparator + priority encoder</td>
+    </tr>
+    <tr>
+      <td><strong>Cascade topology (CAR)</strong></td>
+      <td>Asymmetric roll-off matching basilar membrane + built-in delay line</td>
+      <td class="bad">High — architectural redesign</td>
+    </tr>
+  </table>
+
+  <h3>TI Interview Master Q&A</h3>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">Q: Walk me through your project</div>
+    "I designed a bio-inspired analog frequency analyser in CMOS — a silicon cochlea. The human cochlea performs frequency decomposition using a physical filter bank along the basilar membrane. I replicated this with six OTA-C band-pass filters, logarithmically spaced from 250 Hz to 8 kHz, each followed by an envelope detector. By biasing the OTAs in the subthreshold region, I achieved per-channel power consumption in the single-digit µW range — roughly 100× lower than a DSP-based equivalent. I verified the design using AC, transient, noise, and Monte Carlo analyses in Cadence Virtuoso."
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">Q: What is your biggest design challenge?</div>
+    "Process variation. In subthreshold, transistor threshold voltage V_th varies by ±30–50 mV across a wafer, which shifts center frequencies by ±15–20%. My solution is a digitally-controlled current DAC per channel providing ±30% tuning range on f₀ via bias current adjustment. A per-channel AGC loop simultaneously addresses dynamic range. This makes the design robust to both process variation and input amplitude variation."
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">Q: How does your design compare to TI's TLV320 audio codec?</div>
+    "The TLV320 is a general-purpose audio codec — excellent SNR (98 dB), programmable digital filters, and standard ADC/DAC interfaces. My silicon cochlea targets a different niche: always-on, ultra-low-power audio front-ends where the ADC and DSP are eliminated entirely. The cochlea outputs parallel analog energy signals rather than a digital PCM stream, making it the right front-end for neuromorphic processors and hearing aids where battery life is critical and latency must be below 1 ms. The two designs are complementary rather than competing."
+  </div>
+
+  <div class="callout callout-ti">
+    <div class="callout-label">Q: What would you change if you designed it again?</div>
+    "Three things. First, I'd scale to 16 channels with ERB spacing from the start — the jump from 6 to 16 costs area but dramatically improves speech intelligibility. Second, I'd co-design the envelope detector time constant with the AGC loop from the beginning rather than adding AGC as an afterthought. Third, I'd include the spike encoder in the original architecture — the AER output is what makes the design architecturally distinct from any DSP solution, and demonstrating that full pipeline would be the strongest version of the project."
+  </div>
+
+  <hr>
+  <p class="prose" style="text-align:center;color:var(--text2);">End of curriculum — built for <strong style="color:var(--teal)">DSCE Electronics Engineering</strong> · Silicon Cochlea Project · Texas Instruments Placement Preparation</p>
+</section>
+
+</main>
+
+<script>
+/* ── UTILITIES ── */
+function setActive(el) {
+  setTimeout(() => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+  }, 10);
+}
+
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('.module');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.getAttribute('href') === '#' + current);
+  });
+});
+
+function lerpColor(t, c1, c2) {
+  const r = (a, b) => Math.round(a + (b - a) * t);
+  return `rgb(${r(c1[0],c2[0])},${r(c1[1],c2[1])},${r(c1[2],c2[2])})`;
+}
+
+/* ── MODULE 1: SOUND WAVE ── */
+const cSW = document.getElementById('c_soundwave');
+const ctxSW = cSW.getContext('2d');
+let swPhase = 0;
+
+function drawSoundWave() {
+  const w = cSW.offsetWidth; const h = 120;
+  cSW.width = w; cSW.height = h;
+  ctxSW.clearRect(0, 0, w, h);
+  const cols = 50;
+  const cw = w / cols;
+  for (let i = 0; i < cols; i++) {
+    const x = i * cw;
+    const pressure = Math.sin(i * 0.5 - swPhase) * 0.5 + 0.5;
+    const alpha = 0.2 + pressure * 0.7;
+    const radius = 3 + pressure * 7;
+    ctxSW.beginPath();
+    ctxSW.arc(x + cw / 2, h / 2, radius, 0, Math.PI * 2);
+    ctxSW.fillStyle = `rgba(28,201,154,${alpha})`;
+    ctxSW.fill();
+  }
+  ctxSW.font = '11px system-ui'; ctxSW.fillStyle = '#555e80';
+  ctxSW.textAlign = 'left'; ctxSW.fillText('← compression (high pressure)', 8, h - 8);
+  ctxSW.textAlign = 'right'; ctxSW.fillText('rarefaction (low pressure) →', w - 8, h - 8);
+  swPhase += 0.05;
+  requestAnimationFrame(drawSoundWave);
+}
+drawSoundWave();
+
+/* ── MODULE 1: INTERACTIVE WAVE ── */
+const cWave = document.getElementById('c_wave');
+const ctxWave = cWave.getContext('2d');
+let waveT = 0;
+
+function drawWave() {
+  const w = cWave.offsetWidth; const h = 130;
+  cWave.width = w; cWave.height = h;
+  const f = parseFloat(document.getElementById('wfreq').value);
+  const A = parseFloat(document.getElementById('wamp').value);
+  document.getElementById('wfreq_v').textContent = f + ' Hz';
+  document.getElementById('wamp_v').textContent = A;
+  ctxWave.clearRect(0, 0, w, h);
+  ctxWave.strokeStyle = '#1cc99a'; ctxWave.lineWidth = 2;
+  ctxWave.beginPath();
+  for (let x = 0; x < w; x++) {
+    const t = x / w;
+    const y = h / 2 - A * Math.sin(2 * Math.PI * f * t + waveT);
+    x === 0 ? ctxWave.moveTo(x, y) : ctxWave.lineTo(x, y);
+  }
+  ctxWave.stroke();
+  ctxWave.strokeStyle = '#2a3050'; ctxWave.lineWidth = 0.5; ctxWave.setLineDash([4, 4]);
+  ctxWave.beginPath(); ctxWave.moveTo(0, h/2); ctxWave.lineTo(w, h/2); ctxWave.stroke();
+  ctxWave.setLineDash([]);
+}
+
+function animWave() { waveT += 0.04; drawWave(); requestAnimationFrame(animWave); }
+animWave();
+
+/* ── MODULE 1: SPECTRUM ── */
+const cSpec = document.getElementById('c_spectrum');
+const ctxSpec = cSpec.getContext('2d');
+const specRegions = [
+  { label: 'Sub-bass\n20–80 Hz', info: '20–80 Hz — Sub-bass: Kick drum rumble, earthquake-like low end. The physical "thump" you feel rather than hear. Your cochlea channels don\'t need to go this low for speech processing.', color: '#4a9eff', x: 0 },
+  { label: 'Bass\n80–300 Hz', info: '80–300 Hz — Bass: Fundamental pitch of male voice (100–150 Hz), bass guitar, floor tom. Warmth and body in music. Your 250 Hz channel captures the lower edge of speech fundamentals.', color: '#1cc99a', x: 0 },
+  { label: 'Midrange\n300 Hz–3 kHz', info: '300 Hz–3 kHz — Midrange: Most of speech intelligibility lives here. Vowels, voice character, instrument body. Your 500 Hz, 1 kHz, 2 kHz channels cover this critical zone.', color: '#9b84ff', x: 0 },
+  { label: 'Presence\n3–8 kHz', info: '3–8 kHz — Presence: Consonants (s, f, th, ch), attack transients, voice clarity. Your 4 kHz and 8 kHz channels. Hearing loss here makes speech sound mumbled.', color: '#f5a623', x: 0 },
+  { label: 'Brilliance\n8–20 kHz', info: '8–20 kHz — Brilliance: Shimmer, air, cymbal splash, the brightness of recordings. Less critical for speech but important for music. Your cochlea design covers up to 8 kHz.', color: '#ff6b6b', x: 0 },
+];
+
+function drawSpectrum() {
+  const w = cSpec.offsetWidth; const h = 160;
+  cSpec.width = w; cSpec.height = h;
+  const widths = [0.07, 0.11, 0.35, 0.23, 0.24];
+  let cx = 0;
+  specRegions.forEach((r, i) => {
+    r.x = cx;
+    const rw = widths[i] * w;
+    ctxSpec.fillStyle = r.color + '33';
+    ctxSpec.strokeStyle = r.color;
+    ctxSpec.lineWidth = 1;
+    ctxSpec.beginPath();
+    ctxSpec.roundRect(cx + 2, 10, rw - 4, 100, 6);
+    ctxSpec.fill(); ctxSpec.stroke();
+    ctxSpec.fillStyle = r.color;
+    ctxSpec.font = 'bold 11px system-ui';
+    ctxSpec.textAlign = 'center';
+    const lines = r.label.split('\n');
+    ctxSpec.fillText(lines[0], cx + rw/2, 46);
+    ctxSpec.font = '10px system-ui'; ctxSpec.fillStyle = '#8b90a8';
+    ctxSpec.fillText(lines[1], cx + rw/2, 62);
+    r.w = rw;
+    cx += rw;
+  });
+  ctxSpec.fillStyle = '#555e80'; ctxSpec.font = '11px system-ui'; ctxSpec.textAlign = 'left';
+  ctxSpec.fillText('20 Hz', 4, 130); ctxSpec.textAlign = 'right';
+  ctxSpec.fillText('20,000 Hz', w - 4, 130);
+  ctxSpec.fillStyle = '#1cc99a'; ctxSpec.textAlign = 'center';
+  ctxSpec.fillText('← Your 6 channels cover this range (250 Hz – 8 kHz) →', w/2, 152);
+}
+
+drawSpectrum();
+cSpec.addEventListener('click', e => {
+  const rect = cSpec.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  specRegions.forEach(r => {
+    if (mx >= r.x && mx <= r.x + r.w) {
+      document.getElementById('spec_info').textContent = r.info;
+    }
+  });
+});
+
+/* ── MODULE 2: COCHLEA ── */
+const cCoch = document.getElementById('c_cochlea');
+const ctxCoch = cCoch.getContext('2d');
+let cochT = 0;
+
+function drawCochlea() {
+  const w = cCoch.offsetWidth; const h = 180;
+  cCoch.width = w; cCoch.height = h;
+  ctxCoch.clearRect(0, 0, w, h);
+
+  const bw = w - 80;
+  const bx = 40; const by = 60; const bh = 50;
+
+  const grad = ctxCoch.createLinearGradient(bx, 0, bx + bw, 0);
+  grad.addColorStop(0, '#ff6b6b44');
+  grad.addColorStop(1, '#4a9eff44');
+  ctxCoch.fillStyle = grad; ctxCoch.strokeStyle = '#2a3050'; ctxCoch.lineWidth = 1;
+  ctxCoch.beginPath(); ctxCoch.roundRect(bx, by, bw, bh, 6); ctxCoch.fill(); ctxCoch.stroke();
+
+  const freqs = [8000, 4000, 2000, 1000, 500, 250, 100, 20];
+  freqs.forEach((f, i) => {
+    const x = bx + (i / (freqs.length - 1)) * bw;
+    const wave = Math.sin(cochT * (i + 1) * 0.3) * 8;
+    ctxCoch.fillStyle = i < 4 ? '#ff6b6b' : '#4a9eff';
+    ctxCoch.beginPath();
+    ctxCoch.arc(x, by + bh/2 + wave, 5, 0, Math.PI*2);
+    ctxCoch.fill();
+    ctxCoch.fillStyle = '#8b90a8'; ctxCoch.font = '10px system-ui'; ctxCoch.textAlign = 'center';
+    ctxCoch.fillText(f >= 1000 ? (f/1000)+'k' : f, x, by + bh + 18);
+  });
+
+  ctxCoch.fillStyle = '#ff6b6b'; ctxCoch.font = 'bold 12px system-ui'; ctxCoch.textAlign = 'left';
+  ctxCoch.fillText('BASE', bx, by - 8);
+  ctxCoch.fillText('(stiff, narrow → high freq)', bx, by - 8 + 14);
+  ctxCoch.fillStyle = '#4a9eff'; ctxCoch.textAlign = 'right';
+  ctxCoch.fillText('APEX', bx + bw, by - 8);
+  ctxCoch.fillText('(floppy, wide → low freq)', bx + bw, by - 8 + 14);
+
+  ctxCoch.fillStyle = '#555e80'; ctxCoch.font = '11px system-ui'; ctxCoch.textAlign = 'center';
+  ctxCoch.fillText('Each dot = one point on the basilar membrane — it resonates maximally at its labeled frequency', w/2, h - 8);
+
+  cochT += 0.06;
+  requestAnimationFrame(drawCochlea);
+}
+drawCochlea();
+
+/* ── MODULE 2: TONOTOPIC ── */
+const cTono = document.getElementById('c_tonotopic');
+const ctxTono = cTono.getContext('2d');
+
+function drawTonotopic() {
+  const w = cTono.offsetWidth; const h = 140;
+  cTono.width = w; cTono.height = h;
+  ctxTono.clearRect(0, 0, w, h);
+
+  const bx = 40; const bw = w - 80;
+  const grad = ctxTono.createLinearGradient(bx, 0, bx+bw, 0);
+  grad.addColorStop(0, '#ff6b6b');
+  grad.addColorStop(0.5, '#9b84ff');
+  grad.addColorStop(1, '#4a9eff');
+  ctxTono.fillStyle = grad;
+  ctxTono.beginPath(); ctxTono.roundRect(bx, 40, bw, 40, 8); ctxTono.fill();
+
+  const channels = [{f:250,c:'#4a9eff'},{f:500,c:'#1cc99a'},{f:1000,c:'#9b84ff'},{f:2000,c:'#f5a623'},{f:4000,c:'#ff6b6b'},{f:8000,c:'#ff6b6b'}];
+  channels.forEach(ch => {
+    const t = Math.log10(ch.f/20) / Math.log10(20000/20);
+    const x = bx + t * bw;
+    ctxTono.fillStyle = '#1e2333'; ctxTono.strokeStyle = ch.c; ctxTono.lineWidth = 1.5;
+    ctxTono.beginPath(); ctxTono.arc(x, 60, 7, 0, Math.PI*2); ctxTono.fill(); ctxTono.stroke();
+    ctxTono.fillStyle = ch.c; ctxTono.font = '10px system-ui'; ctxTono.textAlign = 'center';
+    ctxTono.fillText(ch.f >= 1000 ? (ch.f/1000)+'k' : ch.f, x, 98);
+  });
+
+  ctxTono.fillStyle = '#8b90a8'; ctxTono.font = '11px system-ui'; ctxTono.textAlign = 'left';
+  ctxTono.fillText('20 Hz', bx, 114);
+  ctxTono.textAlign = 'right';
+  ctxTono.fillText('20 kHz', bx+bw, 114);
+  ctxTono.textAlign = 'center';
+  ctxTono.fillText('Your 6 cochlea channels (log spacing matches perceptual pitch)', w/2, 132);
+}
+drawTonotopic();
+
+cTono.addEventListener('mousemove', e => {
+  const rect = cTono.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const bx = 40; const bw = cTono.offsetWidth - 80;
+  const t = (mx - bx) / bw;
+  if (t >= 0 && t <= 1) {
+    const f = Math.round(20 * Math.pow(1000, t));
+    document.getElementById('tono_info').textContent = `Position: ${Math.round(t*100)}% from base → frequency: ~${f >= 1000 ? (f/1000).toFixed(1)+'k' : f} Hz`;
+  }
+});
+
+/* ── MODULE 3: RC FILTER ── */
+const cRC = document.getElementById('c_rcfilter');
+const ctxRC = cRC.getContext('2d');
+
+function drawRC() {
+  const w = cRC.offsetWidth; const h = 200;
+  cRC.width = w; cRC.height = h;
+  ctxRC.clearRect(0, 0, w, h);
+
+  const R = parseFloat(document.getElementById('rcR').value) * 1000;
+  const C = parseFloat(document.getElementById('rcC').value) * 1e-9;
+  document.getElementById('rcR_v').textContent = (R/1000).toFixed(0) + ' kΩ';
+  document.getElementById('rcC_v').textContent = (C*1e9).toFixed(0) + ' nF';
+  const fc = 1 / (2 * Math.PI * R * C);
+  document.getElementById('rc_fc').textContent = `Cut-off frequency f_c = 1/(2πRC) = ${fc.toFixed(1)} Hz`;
+
+  const pad = 40; const pw = w - 2*pad; const ph = h - 2*pad;
+  ctxRC.strokeStyle = '#2a3050'; ctxRC.lineWidth = 0.5;
+  for (let db = 0; db >= -60; db -= 20) {
+    const y = pad + ((-db) / 60) * ph;
+    ctxRC.beginPath(); ctxRC.moveTo(pad, y); ctxRC.lineTo(w-pad, y); ctxRC.stroke();
+    ctxRC.fillStyle = '#555e80'; ctxRC.font = '10px system-ui'; ctxRC.textAlign = 'right';
+    ctxRC.fillText(db + ' dB', pad - 4, y + 4);
+  }
+
+  const freqs = [20,50,100,200,500,1000,2000,5000,10000,20000];
+  freqs.forEach(f => {
+    const t = Math.log10(f/20) / Math.log10(1000);
+    const x = pad + t * pw;
+    ctxRC.strokeStyle = '#2a3050'; ctxRC.lineWidth = 0.5;
+    ctxRC.beginPath(); ctxRC.moveTo(x, pad); ctxRC.lineTo(x, h-pad); ctxRC.stroke();
+    ctxRC.fillStyle = '#555e80'; ctxRC.font = '10px system-ui'; ctxRC.textAlign = 'center';
+    ctxRC.fillText(f >= 1000 ? (f/1000)+'k' : f, x, h-pad+14);
+  });
+
+  ctxRC.strokeStyle = '#1cc99a'; ctxRC.lineWidth = 2;
+  ctxRC.beginPath();
+  for (let ix = 0; ix <= pw; ix++) {
+    const f = 20 * Math.pow(1000, ix/pw);
+    const H = 1 / Math.sqrt(1 + Math.pow(f/fc, 2));
+    const db = Math.max(20 * Math.log10(H), -60);
+    const x = pad + ix;
+    const y = pad + ((-db)/60) * ph;
+    ix === 0 ? ctxRC.moveTo(x,y) : ctxRC.lineTo(x,y);
+  }
+  ctxRC.stroke();
+
+  const fcT = Math.log10(fc/20) / Math.log10(1000);
+  const fcX = pad + fcT * pw;
+  if (fcX > pad && fcX < w-pad) {
+    ctxRC.strokeStyle = '#f5a623'; ctxRC.lineWidth = 1; ctxRC.setLineDash([4,4]);
+    ctxRC.beginPath(); ctxRC.moveTo(fcX, pad); ctxRC.lineTo(fcX, h-pad); ctxRC.stroke();
+    ctxRC.setLineDash([]);
+    const fcY = pad + (3/60) * ph;
+    ctxRC.fillStyle = '#f5a623'; ctxRC.font = '11px system-ui'; ctxRC.textAlign = 'left';
+    ctxRC.fillText('f_c (−3 dB)', fcX+4, fcY);
+  }
+
+  ctxRC.fillStyle = '#8b90a8'; ctxRC.font = '11px system-ui'; ctxRC.textAlign = 'center';
+  ctxRC.fillText('Frequency (Hz)', w/2, h-4);
+}
+drawRC();
+
+/* ── MODULE 3: FILTER TYPES ── */
+const cFT = document.getElementById('c_filtertypes');
+const ctxFT = cFT.getContext('2d');
+
+function drawFilterTypes() {
+  const w = cFT.offsetWidth; const h = 200;
+  cFT.width = w; cFT.height = h;
+  ctxFT.clearRect(0, 0, w, h);
+  const pad = 36; const pw = w - 2*pad; const ph = h - 2*pad;
+  ctxFT.strokeStyle = '#2a3050'; ctxFT.lineWidth = 0.5;
+  [0,-20,-40,-60].forEach(db => {
+    const y = pad + ((-db)/60)*ph;
+    ctxFT.beginPath(); ctxFT.moveTo(pad,y); ctxFT.lineTo(w-pad,y); ctxFT.stroke();
+    ctxFT.fillStyle = '#555e80'; ctxFT.font = '10px system-ui'; ctxFT.textAlign = 'right';
+    ctxFT.fillText(db, pad-4, y+4);
+  });
+  [20,200,2000,20000].forEach(f => {
+    const t = Math.log10(f/20)/Math.log10(1000);
+    const x = pad+t*pw;
+    ctxFT.beginPath(); ctxFT.moveTo(x,pad); ctxFT.lineTo(x,h-pad); ctxFT.stroke();
+    ctxFT.fillStyle='#555e80'; ctxFT.font='10px system-ui'; ctxFT.textAlign='center';
+    ctxFT.fillText(f>=1000?(f/1000)+'k':f, x, h-pad+14);
+  });
+
+  const filters = [
+    { color:'#4a9eff', label:'Low-pass (fc=500Hz)', fn: f => 1/Math.sqrt(1+Math.pow(f/500,2)) },
+    { color:'#9b84ff', label:'High-pass (fc=500Hz)', fn: f => (f/500)/Math.sqrt(1+Math.pow(f/500,2)) },
+    { color:'#1cc99a', label:'Band-pass (f0=1kHz, Q=3)', fn: f => { const w=f/1000; return w/(Math.sqrt(Math.pow(1-w*w,2)+Math.pow(w/3,2))); } },
+  ];
+
+  filters.forEach(fl => {
+    ctxFT.strokeStyle = fl.color; ctxFT.lineWidth = 2;
+    ctxFT.beginPath();
+    for (let ix = 0; ix <= pw; ix++) {
+      const f = 20 * Math.pow(1000, ix/pw);
+      const H = Math.min(fl.fn(f), 1);
+      const db = Math.max(20*Math.log10(Math.max(H,1e-6)), -60);
+      const x = pad+ix; const y = pad+((-db)/60)*ph;
+      ix===0 ? ctxFT.moveTo(x,y) : ctxFT.lineTo(x,y);
+    }
+    ctxFT.stroke();
+  });
+
+  const lx = pad+8; let ly = pad+14;
+  filters.forEach(fl => {
+    ctxFT.fillStyle = fl.color; ctxFT.fillRect(lx, ly-8, 16, 3);
+    ctxFT.fillStyle = fl.color; ctxFT.font = '11px system-ui'; ctxFT.textAlign = 'left';
+    ctxFT.fillText(fl.label, lx+20, ly); ly += 18;
+  });
+}
+drawFilterTypes();
+
+/* ── MODULE 3: BPF INTERACTIVE ── */
+const cBPF = document.getElementById('c_bpf');
+const ctxBPF = cBPF.getContext('2d');
+const bpfFreqs = [250, 500, 1000, 2000, 4000, 8000];
+
+function drawBPF() {
+  const w = cBPF.offsetWidth; const h = 220;
+  cBPF.width = w; cBPF.height = h;
+  ctxBPF.clearRect(0, 0, w, h);
+  const fi = parseInt(document.getElementById('bpf_f0').value);
+  const f0 = bpfFreqs[fi];
+  const Q = parseFloat(document.getElementById('bpf_q').value);
+  document.getElementById('bpf_f0_v').textContent = f0 >= 1000 ? (f0/1000)+'k Hz' : f0+' Hz';
+  document.getElementById('bpf_q_v').textContent = 'Q = ' + Q.toFixed(1);
+  document.getElementById('bpf_info').textContent = `Bandwidth = f₀/Q = ${f0}/Q${Q.toFixed(1)} = ${(f0/Q).toFixed(0)} Hz  |  Power per channel ≈ ${(f0/1000*2.5).toFixed(1)} µW (estimated)`;
+
+  const pad=36; const pw=w-2*pad; const ph=h-2*pad;
+  ctxBPF.strokeStyle='#2a3050'; ctxBPF.lineWidth=0.5;
+  [0,-10,-20,-40,-60].forEach(db=>{
+    const y=pad+((-db)/60)*ph;
+    ctxBPF.beginPath(); ctxBPF.moveTo(pad,y); ctxBPF.lineTo(w-pad,y); ctxBPF.stroke();
+    ctxBPF.fillStyle='#555e80'; ctxBPF.font='10px system-ui'; ctxBPF.textAlign='right';
+    ctxBPF.fillText(db, pad-4, y+4);
+  });
+  [100,250,500,1000,2000,4000,8000,20000].forEach(f=>{
+    const t=Math.log10(f/100)/Math.log10(200);
+    const x=pad+t*pw;
+    if(x>pad&&x<w-pad){
+      ctxBPF.beginPath(); ctxBPF.moveTo(x,pad); ctxBPF.lineTo(x,h-pad); ctxBPF.stroke();
+      ctxBPF.fillStyle='#555e80'; ctxBPF.font='10px system-ui'; ctxBPF.textAlign='center';
+      ctxBPF.fillText(f>=1000?(f/1000)+'k':f, x, h-pad+14);
+    }
+  });
+
+  ctxBPF.strokeStyle='#1cc99a'; ctxBPF.lineWidth=2.5;
+  ctxBPF.beginPath();
+  for(let ix=0;ix<=pw;ix++){
+    const f=100*Math.pow(200,ix/pw);
+    const wn=f/f0;
+    const H=wn/(Math.sqrt(Math.pow(1-wn*wn,2)+Math.pow(wn/Q,2)));
+    const db=Math.max(20*Math.log10(Math.max(H,1e-6)),-60);
+    const x=pad+ix; const y=pad+((-db)/60)*ph;
+    ix===0?ctxBPF.moveTo(x,y):ctxBPF.lineTo(x,y);
+  }
+  ctxBPF.stroke();
+
+  const f0t=Math.log10(f0/100)/Math.log10(200);
+  const f0x=pad+f0t*pw;
+  ctxBPF.strokeStyle='#f5a623'; ctxBPF.lineWidth=1; ctxBPF.setLineDash([4,4]);
+  ctxBPF.beginPath(); ctxBPF.moveTo(f0x,pad); ctxBPF.lineTo(f0x,h-pad); ctxBPF.stroke();
+  ctxBPF.setLineDash([]);
+  ctxBPF.fillStyle='#f5a623'; ctxBPF.font='11px system-ui'; ctxBPF.textAlign='center';
+  ctxBPF.fillText('f₀', f0x, pad-4);
+}
+drawBPF();
+
+/* ── MODULE 4: MOSFET ── */
+const cMOS = document.getElementById('c_mosfet');
+const ctxMOS = cMOS.getContext('2d');
+const VTH = 10;
+
+function drawMOSFET() {
+  const w = cMOS.offsetWidth; const h = 200;
+  cMOS.width = w; cMOS.height = h;
+  ctxMOS.clearRect(0, 0, w, h);
+  const vgs = parseFloat(document.getElementById('mos_vgs').value) / 10;
+  document.getElementById('mos_vgs_v').textContent = vgs.toFixed(1) + 'V';
+
+  const vth = VTH/10;
+  const reg = vgs < vth ? 'cutoff' : 'saturation';
+  const gm = vgs < vth ? 0 : Math.pow(vgs - vth, 1) * 50;
+  const flow = Math.min(gm / 100, 1);
+
+  const info = {
+    cutoff: { label: 'Cutoff region — V_GS < V_th — transistor OFF — I_D ≈ 0', color: '#555e80' },
+    saturation: { label: `Saturation region — V_GS > V_th — amplifier mode — I_D ∝ (V_GS−V_th)² — Gm = ${(gm).toFixed(0)} µA/V`, color: '#1cc99a' }
+  };
+
+  const d = info[reg];
+  const el = document.getElementById('mos_region');
+  el.textContent = d.label; el.style.color = d.color;
+
+  const cx = 120; const cy = 100;
+  ctxMOS.strokeStyle = '#4a9eff'; ctxMOS.lineWidth = 3;
+  ctxMOS.beginPath(); ctxMOS.moveTo(40, cy); ctxMOS.lineTo(cx-20, cy); ctxMOS.stroke();
+  ctxMOS.fillStyle = '#4a9eff'; ctxMOS.font = '12px system-ui'; ctxMOS.textAlign = 'center';
+  ctxMOS.fillText('G', 20, cy+4);
+  ctxMOS.fillText(`${vgs.toFixed(1)}V`, 20, cy+18);
+
+  ctxMOS.fillStyle = '#2a3050'; ctxMOS.strokeStyle = '#8b90a8'; ctxMOS.lineWidth = 1;
+  ctxMOS.beginPath(); ctxMOS.roundRect(cx-20, cy-40, 10, 80, 2); ctxMOS.fill(); ctxMOS.stroke();
+  ctxMOS.strokeStyle = '#8b90a8'; ctxMOS.lineWidth = 2;
+  ctxMOS.beginPath(); ctxMOS.moveTo(cx, cy-30); ctxMOS.lineTo(cx, cy+30); ctxMOS.stroke();
+
+  ctxMOS.strokeStyle = flow > 0 ? '#1cc99a' : '#555e80'; ctxMOS.lineWidth = 3;
+  ctxMOS.beginPath(); ctxMOS.moveTo(cx, cy-30); ctxMOS.lineTo(cx+40, cy-30); ctxMOS.stroke();
+  ctxMOS.beginPath(); ctxMOS.moveTo(cx, cy+30); ctxMOS.lineTo(cx+40, cy+30); ctxMOS.stroke();
+  ctxMOS.fillStyle = flow > 0 ? '#1cc99a' : '#555e80'; ctxMOS.font = '12px system-ui'; ctxMOS.textAlign = 'left';
+  ctxMOS.fillText('D (drain)', cx+44, cy-26);
+  ctxMOS.fillText('S (source)', cx+44, cy+34);
+
+  if (flow > 0) {
+    for (let i = 0; i < 4; i++) {
+      const t = ((Date.now()/400 + i/4) % 1);
+      const fy = cy - 30 + t * 60;
+      ctxMOS.fillStyle = `rgba(28,201,154,${0.8-i*0.15})`;
+      ctxMOS.beginPath(); ctxMOS.arc(cx+10, fy, 4*flow, 0, Math.PI*2); ctxMOS.fill();
+    }
+  }
+
+  ctxMOS.fillStyle = '#f5a623'; ctxMOS.font = '11px system-ui'; ctxMOS.textAlign = 'center';
+  ctxMOS.fillText(`V_th = ${vth.toFixed(1)}V`, cx, h-8);
+  ctxMOS.fillText(`V_GS = ${vgs.toFixed(1)}V ${vgs >= vth ? '✓ ON' : '✗ OFF'}`, cx + 80, h-8);
+}
+
+function animMOS() { drawMOSFET(); requestAnimationFrame(animMOS); }
+animMOS();
+
+/* ── MODULE 4: SUBTHRESHOLD ── */
+const cSub = document.getElementById('c_subthresh');
+const ctxSub = cSub.getContext('2d');
+
+function drawSubthresh() {
+  const w = cSub.offsetWidth; const h = 200;
+  cSub.width = w; cSub.height = h;
+  ctxSub.clearRect(0, 0, w, h);
+  const pad=40; const pw=w-2*pad; const ph=h-2*pad;
+
+  ctxSub.strokeStyle='#2a3050'; ctxSub.lineWidth=0.5;
+  [-9,-6,-3,0,3,6].forEach((exp,i)=>{
+    const y=pad+(i/5)*ph;
+    ctxSub.beginPath(); ctxSub.moveTo(pad,y); ctxSub.lineTo(w-pad,y); ctxSub.stroke();
+    ctxSub.fillStyle='#555e80'; ctxSub.font='10px system-ui'; ctxSub.textAlign='right';
+    ctxSub.fillText('10^'+exp, pad-4, y+4);
+  });
+
+  const vth=1.0;
+  ctxSub.strokeStyle='#9b84ff'; ctxSub.lineWidth=2;
+  ctxSub.beginPath();
+  for(let ix=0;ix<=pw;ix++){
+    const vgs=ix/pw*2.5;
+    let id;
+    if(vgs<vth) id=1e-12*Math.exp(vgs/0.04);
+    else id=1e-3*Math.pow(vgs-vth,2);
+    const logId=Math.max(Math.min(Math.log10(id),6),-9);
+    const x=pad+ix; const y=pad+((-logId+6)/15)*ph;
+    ix===0?ctxSub.moveTo(x,y):ctxSub.lineTo(x,y);
+  }
+  ctxSub.stroke();
+
+  const vthx=pad+(vth/2.5)*pw;
+  ctxSub.strokeStyle='#f5a623'; ctxSub.lineWidth=1; ctxSub.setLineDash([4,4]);
+  ctxSub.beginPath(); ctxSub.moveTo(vthx,pad); ctxSub.lineTo(vthx,h-pad); ctxSub.stroke();
+  ctxSub.setLineDash([]);
+  ctxSub.fillStyle='#f5a623'; ctxSub.font='11px system-ui'; ctxSub.textAlign='center';
+  ctxSub.fillText('V_th', vthx, h-pad+14);
+
+  ctxSub.fillStyle='#4a9eff'; ctxSub.font='11px system-ui'; ctxSub.textAlign='left';
+  ctxSub.fillText('← Subthreshold: exp(Vgs/nVT)', pad+8, pad+20);
+  ctxSub.fillText('  Gm ∝ I_D (high Gm/I_D)', pad+8, pad+34);
+  ctxSub.fillStyle='#1cc99a'; ctxSub.textAlign='right';
+  ctxSub.fillText('Above threshold: I_D ∝ (Vgs-Vth)²', w-pad-8, pad+20);
+
+  ctxSub.fillStyle='#8b90a8'; ctxSub.font='11px system-ui'; ctxSub.textAlign='center';
+  ctxSub.fillText('V_GS (V)', w/2, h-4);
+  ctxSub.save(); ctxSub.translate(12, h/2); ctxSub.rotate(-Math.PI/2);
+  ctxSub.fillText('I_D (log scale)', 0, 0); ctxSub.restore();
+}
+drawSubthresh();
+
+/* ── MODULE 5: OTA ── */
+const cOTA = document.getElementById('c_ota');
+const ctxOTA = cOTA.getContext('2d');
+let otaT = 0;
+
+function drawOTA() {
+  const w = cOTA.offsetWidth; const h = 180;
+  cOTA.width = w; cOTA.height = h;
+  ctxOTA.clearRect(0, 0, w, h);
+
+  const cx1 = w*0.28; const cx2 = w*0.65; const cy = h/2;
+
+  ctxOTA.strokeStyle='#4a9eff'; ctxOTA.lineWidth=2;
+  ctxOTA.beginPath(); ctxOTA.moveTo(40, cy-20); ctxOTA.lineTo(cx1-30, cy-20); ctxOTA.stroke();
+  ctxOTA.beginPath(); ctxOTA.moveTo(40, cy+20); ctxOTA.lineTo(cx1-30, cy+20); ctxOTA.stroke();
+  ctxOTA.fillStyle='#4a9eff'; ctxOTA.font='11px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('V+', 20, cy-16); ctxOTA.fillText('V−', 20, cy+24);
+  ctxOTA.fillText('V_in', 20, cy+42);
+
+  ctxOTA.fillStyle='#1e2333'; ctxOTA.strokeStyle='#9b84ff'; ctxOTA.lineWidth=1.5;
+  ctxOTA.beginPath(); ctxOTA.roundRect(cx1-30, cy-40, 60, 80, 8); ctxOTA.fill(); ctxOTA.stroke();
+  ctxOTA.fillStyle='#9b84ff'; ctxOTA.font='bold 13px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('OTA', cx1, cy-4);
+  ctxOTA.font='10px system-ui'; ctxOTA.fillText('Gm', cx1, cy+10);
+
+  ctxOTA.strokeStyle='#1cc99a'; ctxOTA.lineWidth=2;
+  ctxOTA.beginPath(); ctxOTA.moveTo(cx1+30, cy); ctxOTA.lineTo(cx2-20, cy); ctxOTA.stroke();
+  ctxOTA.fillStyle='#1cc99a'; ctxOTA.font='10px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('I_out = Gm·V_in', (cx1+30+cx2-20)/2, cy-8);
+
+  ctxOTA.fillStyle='#1e2333'; ctxOTA.strokeStyle='#1cc99a'; ctxOTA.lineWidth=1.5;
+  ctxOTA.beginPath(); ctxOTA.roundRect(cx2-20, cy-35, 40, 70, 6); ctxOTA.fill(); ctxOTA.stroke();
+  ctxOTA.fillStyle='#1cc99a'; ctxOTA.font='bold 13px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('C', cx2, cy-4);
+  ctxOTA.font='10px system-ui'; ctxOTA.fillText('10 pF', cx2, cy+12);
+
+  const vout = 30 * Math.sin(otaT);
+  ctxOTA.strokeStyle='#f5a623'; ctxOTA.lineWidth=2;
+  ctxOTA.beginPath(); ctxOTA.moveTo(cx2+20, cy); ctxOTA.lineTo(w-30, cy); ctxOTA.stroke();
+  ctxOTA.fillStyle='#f5a623'; ctxOTA.font='11px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('V_out', w-15, cy+4);
+  ctxOTA.fillText(`(integrated)`, w-15, cy+18);
+
+  ctxOTA.fillStyle='#555e80'; ctxOTA.font='10px system-ui'; ctxOTA.textAlign='center';
+  ctxOTA.fillText('f₀ = Gm/(2πC) — change Gm via bias current to tune frequency', w/2, h-8);
+
+  otaT += 0.04;
+  requestAnimationFrame(drawOTA);
+}
+drawOTA();
+
+/* ── MODULE 5: TOW-THOMAS ── */
+const cTT = document.getElementById('c_towtom');
+const ctxTT = cTT.getContext('2d');
+
+function drawTowTom() {
+  const w = cTT.offsetWidth; const h = 200;
+  cTT.width = w; cTT.height = h;
+  ctxTT.clearRect(0, 0, w, h);
+
+  const boxes = [
+    {x:40, y:80, w:80, h:40, label:'Σ sum', color:'#9b84ff'},
+    {x:180, y:80, w:90, h:40, label:'OTA-C Int 1', color:'#1cc99a'},
+    {x:340, y:80, w:90, h:40, label:'OTA-C Int 2', color:'#1cc99a'},
+    {x:490, y:80, w:80, h:40, label:'BPF out', color:'#f5a623'},
+  ];
+
+  boxes.forEach(b => {
+    ctxTT.fillStyle = b.color + '22'; ctxTT.strokeStyle = b.color; ctxTT.lineWidth = 1.5;
+    ctxTT.beginPath(); ctxTT.roundRect(b.x, b.y, b.w, b.h, 6); ctxTT.fill(); ctxTT.stroke();
+    ctxTT.fillStyle = b.color; ctxTT.font = '11px system-ui'; ctxTT.textAlign = 'center';
+    ctxTT.fillText(b.label, b.x + b.w/2, b.y + b.h/2 + 4);
+  });
+
+  const arrowPoints = [[120,100],[180,100],[270,100],[340,100],[430,100],[490,100]];
+  for(let i=0;i<arrowPoints.length-1;i+=2){
+    ctxTT.strokeStyle='#8b90a8'; ctxTT.lineWidth=1.5;
+    ctxTT.beginPath(); ctxTT.moveTo(arrowPoints[i][0],arrowPoints[i][1]); ctxTT.lineTo(arrowPoints[i+1][0],arrowPoints[i+1][1]); ctxTT.stroke();
+  }
+
+  ctxTT.strokeStyle='#ff6b6b'; ctxTT.lineWidth=1.5; ctxTT.setLineDash([4,4]);
+  ctxTT.beginPath(); ctxTT.moveTo(535,80); ctxTT.lineTo(535,40); ctxTT.lineTo(80,40); ctxTT.lineTo(80,80); ctxTT.stroke();
+  ctxTT.setLineDash([]);
+  ctxTT.fillStyle='#ff6b6b'; ctxTT.font='11px system-ui'; ctxTT.textAlign='center';
+  ctxTT.fillText('feedback (sets Q via Gm2)', 310, 30);
+
+  ctxTT.strokeStyle='#4a9eff'; ctxTT.lineWidth=1.5;
+  ctxTT.beginPath(); ctxTT.moveTo(20,100); ctxTT.lineTo(40,100); ctxTT.stroke();
+  ctxTT.fillStyle='#4a9eff'; ctxTT.font='11px system-ui'; ctxTT.textAlign='right';
+  ctxTT.fillText('V_in', 18, 104);
+
+  ctxTT.fillStyle='#8b90a8'; ctxTT.font='10px system-ui'; ctxTT.textAlign='center';
+  ctxTT.fillText('f₀ = Gm/(2πC)', w/2, h-24);
+  ctxTT.fillText('Q = Gm1/Gm2 — tune Q independently by adjusting damping OTA bias', w/2, h-10);
+}
+drawTowTom();
+
+/* ── MODULE 6: ENVELOPE ── */
+const cEnv = document.getElementById('c_envelope');
+const ctxEnv = cEnv.getContext('2d');
+let envT = 0;
+
+function drawEnvelope() {
+  const w = cEnv.offsetWidth; const h = 180;
+  cEnv.width = w; cEnv.height = h;
+  ctxEnv.clearRect(0, 0, w, h);
+
+  const cy = h/2; const amp = 55;
+  const env = t => amp * (0.5 + 0.45*Math.sin(t*0.18));
+
+  ctxEnv.strokeStyle='#2a3050'; ctxEnv.lineWidth=0.5; ctxEnv.setLineDash([3,3]);
+  ctxEnv.beginPath(); ctxEnv.moveTo(0,cy); ctxEnv.lineTo(w,cy); ctxEnv.stroke();
+  ctxEnv.setLineDash([]);
+
+  ctxEnv.strokeStyle='#4a9eff'; ctxEnv.lineWidth=1.5; ctxEnv.globalAlpha=0.6;
+  ctxEnv.beginPath();
+  for(let x=0;x<w;x++){
+    const t = envT+x;
+    const A = env(t);
+    const y = cy - A*Math.sin(t*0.45);
+    x===0?ctxEnv.moveTo(x,y):ctxEnv.lineTo(x,y);
+  }
+  ctxEnv.stroke(); ctxEnv.globalAlpha=1;
+
+  ctxEnv.strokeStyle='#1cc99a'; ctxEnv.lineWidth=2.5;
+  ctxEnv.beginPath();
+  for(let x=0;x<w;x++){
+    const t=envT+x;
+    const A=env(t);
+    const y=cy-A;
+    x===0?ctxEnv.moveTo(x,y):ctxEnv.lineTo(x,y);
+  }
+  ctxEnv.stroke();
+  ctxEnv.beginPath();
+  for(let x=0;x<w;x++){
+    const t=envT+x; const A=env(t); const y=cy+A;
+    x===0?ctxEnv.moveTo(x,y):ctxEnv.lineTo(x,y);
+  }
+  ctxEnv.stroke();
+
+  ctxEnv.fillStyle='#4a9eff'; ctxEnv.font='11px system-ui'; ctxEnv.textAlign='left';
+  ctxEnv.fillText('BPF output (fast carrier oscillation)', 8, 16);
+  ctxEnv.fillStyle='#1cc99a';
+  ctxEnv.fillText('Envelope (slow amplitude variation — your cochlea output)', 8, 32);
+
+  envT += 0.6; requestAnimationFrame(drawEnvelope);
+}
+drawEnvelope();
+
+/* ── MODULE 7: NOISE ── */
+const cNoise = document.getElementById('c_noise');
+const ctxNoise = cNoise.getContext('2d');
+
+function drawNoise() {
+  const w = cNoise.offsetWidth; const h = 180;
+  cNoise.width = w; cNoise.height = h;
+  ctxNoise.clearRect(0, 0, w, h);
+  const pad=40; const pw=w-2*pad; const ph=h-2*pad;
+
+  ctxNoise.strokeStyle='#2a3050'; ctxNoise.lineWidth=0.5;
+  [20,200,2000,20000].forEach(f=>{
+    const t=Math.log10(f/20)/Math.log10(1000);
+    const x=pad+t*pw;
+    ctxNoise.beginPath(); ctxNoise.moveTo(x,pad); ctxNoise.lineTo(x,h-pad); ctxNoise.stroke();
+    ctxNoise.fillStyle='#555e80'; ctxNoise.font='10px system-ui'; ctxNoise.textAlign='center';
+    ctxNoise.fillText(f>=1000?(f/1000)+'k':f, x, h-pad+14);
+  });
+
+  const fc = 1000;
+  ctxNoise.strokeStyle='#f5a623'; ctxNoise.lineWidth=2;
+  ctxNoise.beginPath();
+  for(let ix=0;ix<=pw;ix++){
+    const f=20*Math.pow(1000,ix/pw);
+    const flicker = Math.log10(fc/f) * 10;
+    const thermal = 0;
+    const total = Math.max(flicker, thermal);
+    const y=pad+((60-total)/60)*ph;
+    ix===0?ctxNoise.moveTo(pad+ix,y):ctxNoise.lineTo(pad+ix,y);
+  }
+  ctxNoise.stroke();
+
+  ctxNoise.strokeStyle='#4a9eff'; ctxNoise.lineWidth=1.5; ctxNoise.setLineDash([6,4]);
+  ctxNoise.beginPath();
+  ctxNoise.moveTo(pad, pad+(60/60)*ph); ctxNoise.lineTo(pad+pw, pad+(60/60)*ph);
+  ctxNoise.stroke(); ctxNoise.setLineDash([]);
+
+  ctxNoise.fillStyle='#f5a623'; ctxNoise.font='11px system-ui'; ctxNoise.textAlign='left';
+  ctxNoise.fillText('Total noise (1/f + thermal)', pad+8, pad+16);
+  ctxNoise.fillStyle='#4a9eff';
+  ctxNoise.fillText('Thermal noise floor (white)', pad+8, pad+32);
+
+  const fc_t=Math.log10(fc/20)/Math.log10(1000);
+  const fcx=pad+fc_t*pw;
+  ctxNoise.strokeStyle='#ff6b6b'; ctxNoise.lineWidth=1; ctxNoise.setLineDash([3,3]);
+  ctxNoise.beginPath(); ctxNoise.moveTo(fcx,pad); ctxNoise.lineTo(fcx,h-pad); ctxNoise.stroke();
+  ctxNoise.setLineDash([]);
+  ctxNoise.fillStyle='#ff6b6b'; ctxNoise.font='11px system-ui'; ctxNoise.textAlign='center';
+  ctxNoise.fillText('1/f corner', fcx, pad-4);
+
+  ctxNoise.fillStyle='#8b90a8'; ctxNoise.font='11px system-ui'; ctxNoise.textAlign='center';
+  ctxNoise.fillText('Frequency (Hz) — your audio band', w/2, h-4);
+}
+drawNoise();
+
+/* ── MODULE 8: ARCH ── */
+const cArch = document.getElementById('c_arch');
+const ctxArch = cArch.getContext('2d');
+let archT = 0;
+
+function drawArch() {
+  const w = cArch.offsetWidth; const h = 280;
+  cArch.width = w; cArch.height = h;
+  ctxArch.clearRect(0, 0, w, h);
+
+  const blocks = [
+    {x:10,y:110,w:70,h:60,label:'Mic\ninput',color:'#8b90a8'},
+    {x:100,y:100,w:80,h:80,label:'Pre-\namp',color:'#4a9eff'},
+    {x:210,y:20,w:80,h:240,label:'',color:'#2a3050',isbus:true},
+  ];
+
+  ctxArch.fillStyle='#2a3050'; ctxArch.strokeStyle='#555e80'; ctxArch.lineWidth=1;
+  ctxArch.beginPath(); ctxArch.roundRect(210,20,4,240,2); ctxArch.fill(); ctxArch.stroke();
+  ctxArch.fillStyle='#555e80'; ctxArch.font='10px system-ui'; ctxArch.textAlign='center';
+  ctxArch.fillText('signal bus', 212, 14);
+
+  const channels = [
+    {f:'250 Hz',y:38,c:'#4a9eff'},
+    {f:'500 Hz',y:78,c:'#1cc99a'},
+    {f:'1 kHz',y:118,c:'#9b84ff'},
+    {f:'2 kHz',y:158,c:'#f5a623'},
+    {f:'4 kHz',y:198,c:'#ff6b6b'},
+    {f:'8 kHz',y:238,c:'#ff79c6'},
+  ];
+
+  channels.forEach((ch,i) => {
+    ctxArch.strokeStyle=ch.c; ctxArch.lineWidth=1;
+    ctxArch.beginPath(); ctxArch.moveTo(214,ch.y+12); ctxArch.lineTo(240,ch.y+12); ctxArch.stroke();
+
+    ctxArch.fillStyle=ch.c+'22'; ctxArch.strokeStyle=ch.c; ctxArch.lineWidth=1;
+    ctxArch.beginPath(); ctxArch.roundRect(240,ch.y,90,24,5); ctxArch.fill(); ctxArch.stroke();
+    ctxArch.fillStyle=ch.c; ctxArch.font='10px system-ui'; ctxArch.textAlign='center';
+    ctxArch.fillText('BPF '+ch.f, 285, ch.y+14);
+
+    ctxArch.strokeStyle=ch.c; ctxArch.lineWidth=1;
+    ctxArch.beginPath(); ctxArch.moveTo(330,ch.y+12); ctxArch.lineTo(350,ch.y+12); ctxArch.stroke();
+
+    ctxArch.fillStyle=ch.c+'22'; ctxArch.strokeStyle=ch.c;
+    ctxArch.beginPath(); ctxArch.roundRect(350,ch.y,80,24,5); ctxArch.fill(); ctxArch.stroke();
+    ctxArch.fillStyle=ch.c; ctxArch.font='10px system-ui'; ctxArch.textAlign='center';
+    ctxArch.fillText('Env. det.', 390, ch.y+14);
+
+    ctxArch.strokeStyle=ch.c; ctxArch.lineWidth=1;
+    ctxArch.beginPath(); ctxArch.moveTo(430,ch.y+12); ctxArch.lineTo(460,ch.y+12); ctxArch.stroke();
+
+    const amp = 0.4 + 0.6*Math.abs(Math.sin(archT + i));
+    ctxArch.fillStyle=ch.c; ctxArch.font='bold 10px system-ui'; ctxArch.textAlign='left';
+    ctxArch.globalAlpha=0.4+amp*0.6;
+    ctxArch.fillText('▌', 462, ch.y+15);
+    ctxArch.globalAlpha=1;
+    ctxArch.fillStyle='#555e80'; ctxArch.font='10px system-ui';
+    ctxArch.fillText('Ch'+(i+1)+' out', 472, ch.y+14);
+  });
+
+  ctxArch.fillStyle='#2a3050'; ctxArch.strokeStyle='#8b90a8'; ctxArch.lineWidth=1.5;
+  ctxArch.beginPath(); ctxArch.roundRect(10,110,70,60,6); ctxArch.fill(); ctxArch.stroke();
+  ctxArch.fillStyle='#8b90a8'; ctxArch.font='11px system-ui'; ctxArch.textAlign='center';
+  ctxArch.fillText('Mic', 45, 136); ctxArch.fillText('input', 45, 152);
+
+  ctxArch.fillStyle='#2a3050'; ctxArch.strokeStyle='#4a9eff'; ctxArch.lineWidth=1.5;
+  ctxArch.beginPath(); ctxArch.roundRect(100,100,80,80,8); ctxArch.fill(); ctxArch.stroke();
+  ctxArch.fillStyle='#4a9eff'; ctxArch.font='11px system-ui'; ctxArch.textAlign='center';
+  ctxArch.fillText('Pre-amp', 140, 132); ctxArch.fillText('(OTA)', 140, 148); ctxArch.fillText('20-40dB', 140, 164);
+
+  ctxArch.strokeStyle='#8b90a8'; ctxArch.lineWidth=1.5;
+  ctxArch.beginPath(); ctxArch.moveTo(80,140); ctxArch.lineTo(100,140); ctxArch.stroke();
+  ctxArch.beginPath(); ctxArch.moveTo(180,140); ctxArch.lineTo(212,140); ctxArch.stroke();
+
+  archT += 0.04; requestAnimationFrame(drawArch);
+}
+drawArch();
+
+/* ── INIT PROGRESS BARS ANIMATED ── */
+setTimeout(() => {
+  document.querySelectorAll('.progress-fill').forEach(el => {
+    el.style.width = el.style.width;
+  });
+}, 500);
+
+</script>
+</body>
+</html>
